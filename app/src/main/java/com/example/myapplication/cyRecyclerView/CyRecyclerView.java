@@ -23,6 +23,7 @@ import java.util.List;
  * 1、上拉刷新
  * 2、下拉刷新（支持只剩几个item时响应）
  * 3、空页面
+ * 4、抽屉功能
  */
 public class CyRecyclerView extends RecyclerView {
 
@@ -270,6 +271,8 @@ public class CyRecyclerView extends RecyclerView {
     private float mLastY = -1; // 记录拖动的
     private static final float DRAG_RATE = 3;  // 下拉的程度和手指移动的程度的比例
 
+    public static SwipeItem curSwipeItem;
+
     /**
      * 在这里响应下拉事件
      *
@@ -278,6 +281,12 @@ public class CyRecyclerView extends RecyclerView {
      */
     @Override
     public boolean onTouchEvent(MotionEvent e) {
+
+        // 如果有抽屉打开，滑动关闭抽屉
+        if (curSwipeItem != null) {
+            curSwipeItem.closeSwipe();
+        }
+
         // 监听为空
         if (mLoadingListener == null) return super.onTouchEvent(e);
 
