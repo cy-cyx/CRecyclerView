@@ -83,8 +83,6 @@ public class SwipeItem extends FrameLayout {
                     } else if (translationX < -swipeWidth) {
                         translationX = -swipeWidth;
                     }
-                    String s = (String) getChildAt(0).getTag();
-                    Log.d("xx", "onTouchEvent: " + s);
 
                     getChildAt(0).scrollTo((int) -translationX, 0);
                     eventX = event.getX();
